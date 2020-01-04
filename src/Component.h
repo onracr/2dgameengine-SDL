@@ -4,12 +4,13 @@
 class Component
 {
     public:
-	Entity* owner;
+		std::string componentName;
+		class Entity* owner;
 	
-	virtual ~Component() {}
-	virtual void Initializer() {}
-	virtual void Update(float) {}
-	virtual void Render() {}
-}
+		virtual ~Component() {}
+		virtual void Initializer() {}
+		virtual void Update(float) {}
+		virtual void Render() {}
+};
 
 #endif
