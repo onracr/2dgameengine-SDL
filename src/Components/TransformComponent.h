@@ -2,9 +2,7 @@
 #define TRANSFORMCOMPONENT_H
 
 #include "../../lib/glm/glm.hpp"
-#include "../Game.h"
 #include "../Component.h"
-#include <SDL2/SDL.h>
 
 class TransformComponent : public Component
 {
@@ -24,7 +22,7 @@ class TransformComponent : public Component
             scale = s;
         }
         
-        void Initialize()
+        void Initializer() const
         {
 
         }
@@ -37,15 +35,7 @@ class TransformComponent : public Component
 
         void Render() override
         {
-            SDL_Rect transformRectangle = 
-            {
-                (int) position.x,
-                (int) position.y,
-                width,
-                height
-            };
-            SDL_SetRenderDrawColor(Game::renderer, 0, 0, 255, 255);
-            SDL_RenderFillRect(Game::renderer, &transformRectangle);
+
         }
 };
 

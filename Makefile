@@ -1,5 +1,5 @@
 build:
-	g++ -w -std=c++14 -Wfatal-errors \
+	g++ -w -std=c++14 -Wall -Wfatal-errors \
 	./src/*.cpp \
 	-o game.exe \
 	-I"C:\LibSDL\SDL2\include" \
@@ -13,9 +13,8 @@ build:
 	-lSDL2_ttf \
 	-lSDL2_mixer \
 	-lSDL2
-
 clean:
-	del game.exe
+	del game.exe;
 
 run:
-	game.exe
+	game.exe;

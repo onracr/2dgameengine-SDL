@@ -2,23 +2,15 @@
 #include "Entity.h"
 #include "Constants.h"
 #include "Game.h"
+#include "AssetManager.h"
+#include "Components/SpriteComponent.h"
 #include "Components/TransformComponent.h"
 #include "../lib/glm/glm.hpp"
 
-SDL_Renderer* Game::renderer;
 EntityManager manager;
+SDL_Renderer* Game::renderer;
+AssetManager* Game::assetManager = new AssetManager(&manager);
 
-void Game::GetEntityNames() const
-{
-    for (auto& entity : manager.GetEntities())
-    {
-        std::cout << entity->name << std::endl;
-        for(auto& component : entity->GetComponents())
-        {
-            std::cout << "\t" << component->componentName << std::endl;
-        }
-    }
-}
 
 Game::Game()
 {
@@ -68,14 +60,14 @@ void Game::Initialize(int width, int height)
 
 void Game::LoadLevel(int levelNumber)
 {
-    Entity& entity(manager.AddEntity("projectile"));
-    Entity& entity_2(manager.AddEntity("projectile_2"));
-    auto& entity_3(manager.AddEntity("projectile_3"));
-    auto& entity_4(manager.AddEntity("projectile_4"));
+    /** Start including new assets to the assetmanager map */
+    std::string textureFilePath = "./assets/images/tank-big-right.png";
+    assetManager->AddTexture("tank-img" , textureFilePath.c_str());
+    /** Start including entities and also components to them */
+    
+    Entity& entity(manager.AddEntity("tank"));
     entity.AddComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
-    entity_2.AddComponent<TransformComponent>(768, 0, -20, 20, 32, 32, 1);
-    entity_3.AddComponent<TransformComponent>(0, 568, 20, -20, 32, 32, 1);
-    entity_4.AddComponent<TransformComponent>(768, 568, -20, -20, 32, 32, 1);
+    entity.AddComponent<SpriteComponent>("tank-img");
 }
 
 void Game::ProcessInput()

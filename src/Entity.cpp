@@ -30,6 +30,7 @@ void Entity::Render()
 void Entity::Destroy()
 {
     isActive = false;
+
 }
 
 bool Entity::IsActive() const

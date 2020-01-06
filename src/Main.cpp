@@ -7,7 +7,6 @@ int main(int argc, char *argv[])
     Game* game = new Game();
 
     game->Initialize(WINDOW_WIDTH, WINDOW_HEIGHT);
-    game->GetEntityNames();
 
     while(game->IsRunning())
     {
