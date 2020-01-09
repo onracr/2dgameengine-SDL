@@ -3,6 +3,7 @@
 
 #include "../../lib/glm/glm.hpp"
 #include "../Component.h"
+#include "../Constants.h"
 
 class TransformComponent : public Component
 {
@@ -13,6 +14,10 @@ class TransformComponent : public Component
         int height;
         int scale;
 
+    private:
+	const float clampValue {5.f};	
+
+    public:	
         TransformComponent(int posX, int posY, int velX, int velY, int w, int h, int s)
         {
             position = glm::vec2(posX, posY);
@@ -22,21 +27,31 @@ class TransformComponent : public Component
             scale = s;
         }
         
-        void Initializer() const
-        {
-
-        }
-
         void Update(float deltaTime) override
         {
             position.x += velocity.x * deltaTime;
             position.y += velocity.y * deltaTime;
         }
 
-        void Render() override
-        {
+	bool BoundsCheckX(const float x) const
+	{
+	    return x >= WINDOW_WIDTH - clampValue;
+	}
 
-        }
+	bool BoundsCheck_X(const float x) const
+	{
+	    return x <= clampValue;
+	}
+
+	bool BoundsCheckY(const float y) const
+	{
+	    return y >= WINDOW_HEIGHT - clampValue;
+	}
+
+	bool BoundsCheck_Y(const float y) const
+	{
+	    return y <= clampValue;
+	}
 };
 
 #endif

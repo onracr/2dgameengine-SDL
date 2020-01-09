@@ -12,11 +12,15 @@ class Game
     private:
         bool isRunning;
         SDL_Window *window;
+	class TransformComponent* transform;
 
     public:
         int ticksLastFrame;
         static SDL_Renderer *renderer;
 	static AssetManager* assetManager;
+	static SDL_Event event;
+	static SDL_Rect camera;
+
         Game();
         ~Game();
         void Initialize(int, int);
@@ -27,6 +31,10 @@ class Game
         void Destroy();
         bool IsRunning() const;
         void GetEntityNames() const;
+	void HandleCameraMovement();
+	void CheckCollisions();
+	void ProcessNextLevel(int);
+	void ProcessGameOver();
 };
 
 #endif

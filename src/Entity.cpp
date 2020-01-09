@@ -1,13 +1,15 @@
 #include "Entity.h"
 #include "Component.h"
 
+#include <iostream>
+
 Entity::Entity(EntityManager& entityManager) : manager(entityManager)
 {
     isActive = true;
 }
 
-Entity::Entity(EntityManager& manager, std::string name) : manager(manager), name(name)
-{
+Entity::Entity(EntityManager& manager, std::string name, LayerType layer) 
+    : manager(manager), name(name), layer(layer) {
     isActive = true;
 }
 
@@ -37,3 +39,12 @@ bool Entity::IsActive() const
 {
     return isActive;
 }
+
+void Entity::ListAllComponents() const
+{
+    for (auto& mapElement : componentTypeMap)
+    {
+	std::cout << "	Component<" << mapElement.first->name() << ">" << std::endl;
+    }
+}
+
